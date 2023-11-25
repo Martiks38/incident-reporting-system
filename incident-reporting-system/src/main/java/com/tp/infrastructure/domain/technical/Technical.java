@@ -26,21 +26,30 @@ import com.tp.infrastructure.domain.specialty.Specialty;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "technical")
+@Table(name = "technical", schema = "technical")
 @Entity
 public class Technical {
   @Id
-  @Column
+  @Column(name = "id", nullable = false)
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID technical_id;
 
-  @Column
+  @Column(nullable = false)
   private String technical_name;
+
+  @Column(nullable = false)
+  private String means_notification;
+
+  @Column(nullable = false)
+  private int number_incidents_resolved;
+
+  @Column(nullable = false)
+  private Long incident_resolution_speed;
 
   @OneToMany(mappedBy = "technical")
   private List<Incident> incidents;
 
   @ManyToMany
-  @JoinTable(name = "technical__specialty", joinColumns = @JoinColumn(name = "technical_id"), inverseJoinColumns = @JoinColumn(name = "specialty_id"))
+  @JoinTable(name = "technical__specialty", joinColumns = @JoinColumn(name = "fk_ts_technical"), inverseJoinColumns = @JoinColumn(name = "fk_ts_specialty"))
   private List<Specialty> specialties;
 }

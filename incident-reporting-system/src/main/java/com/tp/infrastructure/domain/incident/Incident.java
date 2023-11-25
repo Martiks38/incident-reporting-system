@@ -27,36 +27,39 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "incident")
+@Table(name = "incident", schema = "incident")
 @Entity
 public class Incident {
   @Id
+  @Column(name = "id", nullable = false)
   @GeneratedValue(strategy = GenerationType.UUID)
-  @Column
   private UUID incident_id;
-
-  @Column
-  private String considerations;
 
   @Column(nullable = false, columnDefinition = "TINYINT(1)")
   private String resolved;
 
-  @Column
+  @Column(nullable = false)
+  private String description;
+
+  @Column(nullable = false)
+  private String considerations;
+
+  @Column(nullable = false)
   @Temporal(TemporalType.DATE)
   private Date create_time;
 
-  @Column
-  private String description;
+  @Temporal(TemporalType.DATE)
+  private Date time_us_up;
 
   @ManyToOne
-  @JoinColumn(name = "technical_id")
+  @JoinColumn(name = "fk_incident_technical")
   private Technical technical;
 
   @ManyToOne
-  @JoinColumn(name = "client_id")
-  private Client client;
+  @JoinColumn(name = "fk_incident_type_problem")
+  private TypeProblem typeProblem;
 
   @ManyToOne
-  @JoinColumn(name = "type_problem")
-  private TypeProblem typeProblem;
+  @JoinColumn(name = "fk_incident_client")
+  private Client client;
 }

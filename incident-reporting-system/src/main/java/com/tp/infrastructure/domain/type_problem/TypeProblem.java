@@ -1,6 +1,5 @@
 package com.tp.infrastructure.domain.type_problem;
 
-import java.sql.Date;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -13,8 +12,6 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
 import com.tp.infrastructure.domain.incident.Incident;
 import com.tp.infrastructure.domain.specialty.Specialty;
@@ -28,25 +25,27 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "type_problem")
+@Table(name = "type_problem", schema = "type_problem")
 @Entity
 public class TypeProblem {
   @Id
-  @Column
+  @Column(nullable = false, name = "id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long type_problem_id;
 
-  @Column
+  @Column(nullable = false)
   private String type_problem_name;
 
-  @Column
-  @Temporal(TemporalType.DATE)
-  private Date resolution_time;
+  @Column(nullable = false)
+  private Long maximum_resolution_time;
+
+  @Column(nullable = false)
+  private Long stimated_resolution_time;
 
   @ManyToMany
-  @JoinTable(name = "type_problem__specialty", joinColumns = @JoinColumn(name = "type_problem_id"), inverseJoinColumns = @JoinColumn(name = "specialty_id"))
+  @JoinTable(name = "type_problem__specialty", joinColumns = @JoinColumn(name = "fk_tps_type_problem"), inverseJoinColumns = @JoinColumn(name = "fk_tps_specialty"))
   private List<Specialty> specialties;
 
-  @OneToMany(mappedBy = "type_problem")
+  @OneToMany(mappedBy = "typeProblem")
   private List<Incident> incidents;
 }

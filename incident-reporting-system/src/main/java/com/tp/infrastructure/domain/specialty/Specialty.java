@@ -23,15 +23,15 @@ import com.tp.infrastructure.domain.type_problem.TypeProblem;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "specialty")
+@Table(name = "specialty", schema = "specialty")
 @Entity
 public class Specialty {
   @Id
-  @Column
+  @Column(name = "id", nullable = false)
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long specialty_id;
 
-  @Column
+  @Column(nullable = false)
   private String specialty_name;
 
   @ManyToMany(mappedBy = "specialties")
