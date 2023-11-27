@@ -12,6 +12,7 @@
         <class>com.tp.infrastructure.domain.specialty.Specialty</class>
         <class>com.tp.infrastructure.domain.technical.Technical</class>
         <class>com.tp.infrastructure.domain.type_problem.TypeProblem</class>
+        <class>com.tp.Main</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/incident-reporting-system" />

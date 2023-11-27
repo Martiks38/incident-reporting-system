@@ -41,7 +41,7 @@ public class Main {
         // em.persist(u);
         tx.commit();
 
-        // System.out.println(user);
+        System.out.println("hi");
 
         // mysqlSessionFactory.close();
     }
