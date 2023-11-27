@@ -5,7 +5,7 @@
              http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
 
-    <persistence-unit name="user_test" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="incident-reporting-system" transaction-type="RESOURCE_LOCAL">
 
         <class>com.tp.infrastructure.domain.client.Client</class>
         <class>com.tp.infrastructure.domain.incident.Incident</class>

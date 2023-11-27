@@ -5,7 +5,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 public final class GetEntityManager {
-  private final String persistenceUnitName= "user_test";
+  private final String persistenceUnitName= "incident-reporting-system";
 
   private static GetEntityManager instance;
   private static EntityManager manager;
