@@ -1,7 +1,6 @@
 package com.tp.infrastructure.domain.technical;
 
 import java.util.List;
-import java.util.UUID;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,9 +29,9 @@ import com.tp.infrastructure.domain.specialty.Specialty;
 @Entity
 public class Technical {
   @Id
-  @Column(name = "id", nullable = false)
+  @Column(name = "id", nullable = false, length = 36)
   @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID technical_id;
+  private String technical_id;
 
   @Column(nullable = false)
   private String technical_name;
@@ -43,7 +42,7 @@ public class Technical {
   @Column(nullable = false)
   private int number_incidents_resolved;
 
-  @Column(nullable = false)
+  @Column(nullable = true)
   private Long incident_resolution_speed;
 
   @OneToMany(mappedBy = "technical")
