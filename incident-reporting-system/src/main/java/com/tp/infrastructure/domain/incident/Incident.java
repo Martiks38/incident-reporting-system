@@ -1,7 +1,6 @@
 package com.tp.infrastructure.domain.incident;
 
 import java.sql.Date;
-import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,9 +30,9 @@ import lombok.Setter;
 @Entity
 public class Incident {
   @Id
-  @Column(name = "id", nullable = false)
+  @Column(name = "id", nullable = false, length = 36)
   @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID incident_id;
+  private String incident_id;
 
   @Column(nullable = false, columnDefinition = "TINYINT(1)")
   private String resolved;
