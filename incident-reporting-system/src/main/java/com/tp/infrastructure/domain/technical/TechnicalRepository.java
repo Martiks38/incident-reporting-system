@@ -1,6 +1,10 @@
 package com.tp.infrastructure.domain.technical;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import com.tp.infrastructure.domain.specialty.Specialty;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -49,7 +53,6 @@ public class TechnicalRepository implements TechnicalDAO{
       e.printStackTrace();
       System.err.println("Error en la transacción: " + e.getMessage());
     }
-
   }
 
   @Override
@@ -65,25 +68,38 @@ public class TechnicalRepository implements TechnicalDAO{
         throw new RuntimeException("No se ha encontrado el técnico para actualizar sus datos.");
       }
 
-      String t_name = technical.getTechnical_name();
-      String t_media = technical.getMeans_notification();
-      int number_incidents_resolved = technical.getNumber_incidents_resolved();
-      Long incident_resolution_speed = technical.getIncident_resolution_speed();
-      
+      String t_name = data.getTechnical_name();
+      String t_media = data.getMeans_notification();
+      Integer t_number_incidents_resolved = data.getNumber_incidents_resolved();
+      Long t_incident_resolution_speed = data.getIncident_resolution_speed();
+      List<Specialty> t_specialties = data.getSpecialties();
+
       if(t_name != null){
         technical.setTechnical_name(t_name);
       }
 
-      if(t_media == null){
+      if(t_media != null){
         technical.setMeans_notification(t_media);
       }
 
-      if(number_incidents_resolved < 0){
-        technical.setNumber_incidents_resolved(number_incidents_resolved);
+      if(t_number_incidents_resolved != null){
+        technical.setNumber_incidents_resolved(t_number_incidents_resolved);
       }
 
-      if(incident_resolution_speed < 0){
-        technical.setIncident_resolution_speed(incident_resolution_speed);
+      if(t_incident_resolution_speed != null){
+        technical.setIncident_resolution_speed(t_incident_resolution_speed);
+      }
+
+      if(t_specialties != null && t_specialties.size() != 0){
+        List<String> specialties_name = technical
+          .getSpecialties().stream()
+          .map(s -> s.getSpecialty_name())
+          .collect(Collectors.toList());
+        
+        // Set<String> currentSpecialties = new HashMap<>(specialties_name);
+        
+        // List<String> newSpecialtiesList = 
+
       }
 
       manager.persist(technical);

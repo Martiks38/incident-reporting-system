@@ -1,7 +1,6 @@
 package com.tp.infrastructure.domain.client;
 
 import java.util.List;
-import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,11 +28,11 @@ import lombok.Setter;
 @Entity
 public class Client {
   @Id
-  @Column(name = "id", nullable = false)
+  @Column(name = "id", nullable = false, length = 36)
   @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID client_id;
+  private String client_id;
 
-  @Column(nullable = false)
+  @Column(nullable = false, length = 11)
   private String cuit;
 
   @Column(nullable = false)
