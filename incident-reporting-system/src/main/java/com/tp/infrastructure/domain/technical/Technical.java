@@ -31,7 +31,7 @@ public class Technical {
 
   @Id
   @Getter
-  @Column(name = "id", nullable = false, length = 36, insertable = false, updatable = false)
+  @Column(name = "id", nullable = false, length = 36)
   @GeneratedValue(strategy = GenerationType.UUID)
   private String technical_id;
 

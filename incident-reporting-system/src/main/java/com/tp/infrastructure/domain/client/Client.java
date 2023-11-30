@@ -29,7 +29,7 @@ import lombok.Setter;
 public class Client {
   @Id
   @Getter
-  @Column(name = "id", nullable = false, length = 36, insertable = false, updatable = false)
+  @Column(name = "id", nullable = false, length = 36)
   @GeneratedValue(strategy = GenerationType.UUID)
   private String client_id;
 
@@ -49,13 +49,12 @@ public class Client {
   private String mail;
   
   @Getter
-  @Setter
   @OneToMany(mappedBy = "client")
   private List<Incident> incidents;
   
   @Getter
   @Setter
   @ManyToMany
-  @JoinTable(name = "client__service", joinColumns = @JoinColumn(name = "fk_cs_client", nullable = false), inverseJoinColumns = @JoinColumn(name = "fk_cs_service", nullable = false))
+  @JoinTable(name = "client__service", joinColumns = @JoinColumn(name = "fk_cs_service", nullable = false), inverseJoinColumns = @JoinColumn(name = "fk_cs_client", nullable = false))
   private List<Service> client_services;
 }

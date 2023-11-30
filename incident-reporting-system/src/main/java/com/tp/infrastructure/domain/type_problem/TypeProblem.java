@@ -12,8 +12,6 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
-import com.tp.infrastructure.domain.incident.Incident;
-import com.tp.infrastructure.domain.service.Service;
 import com.tp.infrastructure.domain.specialty.Specialty;
 
 import lombok.AllArgsConstructor;
@@ -30,8 +28,8 @@ import lombok.Setter;
 public class TypeProblem {
   @Id
   @Getter
-  @Column(nullable = false, name = "id", insertable = false, updatable = false)
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(nullable = false, name = "id")
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Long type_problem_id;
 
   @Getter
@@ -54,15 +52,4 @@ public class TypeProblem {
   @ManyToMany
   @JoinTable(name = "type_problem__specialty", joinColumns = @JoinColumn(name = "fk_tps_type_problem"), inverseJoinColumns = @JoinColumn(name = "fk_tps_specialty"))
   private List<Specialty> specialties;
-
-  @Getter
-  @Setter
-  @ManyToMany(mappedBy = "incident_type_problem")
-  private List<Incident> incidents;
-
-  @Getter
-  @Setter
-  @ManyToMany
-  @JoinTable(name = "service__type_problem", joinColumns = @JoinColumn(name = "fk_stp_service", nullable = false), inverseJoinColumns = @JoinColumn(name = "fk_stp_type_problem", nullable = false))
-  private List<Service> type_problem_services;
 }

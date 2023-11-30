@@ -10,6 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
@@ -25,8 +27,8 @@ import lombok.Setter;
 public class Service {
   @Id
   @Getter
-  @Column(name = "id", nullable = false, insertable = false, updatable = false)
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", nullable = false)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Long service_id;
 
   @Getter
@@ -41,6 +43,7 @@ public class Service {
 
   @Getter
   @Setter
-  @ManyToMany(mappedBy = "type_problem_services")
+  @ManyToMany
+  @JoinTable(name = "service__type_problem", joinColumns = @JoinColumn(name = "fk_stp_service", nullable = false), inverseJoinColumns = @JoinColumn(name = "fk_stp_type_problem", nullable = false))
   private List<TypeProblem> typesProblem;
 }

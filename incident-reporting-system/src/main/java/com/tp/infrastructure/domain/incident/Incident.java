@@ -32,7 +32,7 @@ import lombok.Setter;
 public class Incident {
   @Id
   @Getter
-  @Column(name = "id", nullable = false, length = 36, insertable = false, updatable = false)
+  @Column(name = "id", nullable = false, length = 36)
   @GeneratedValue(strategy = GenerationType.UUID)
   private String incident_id;
 
@@ -65,13 +65,13 @@ public class Incident {
   @Getter
   @Setter
   @ManyToOne
-  @JoinColumn(name = "fk_incident_technical")
+  @JoinColumn(name = "fk_technical_id")
   private Technical technical;
 
   @Getter
   @Setter
   @ManyToOne
-  @JoinColumn(name = "fk_incident_client")
+  @JoinColumn(name = "fk_client_id")
   private Client client;
 
   @Getter

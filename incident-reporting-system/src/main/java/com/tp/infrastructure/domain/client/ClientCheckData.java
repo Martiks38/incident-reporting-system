@@ -11,7 +11,7 @@ public class ClientCheckData {
     int id_length = id.length();
 
     String cuit = c.getCuit();
-    String bussiness_name = c.getBussiness_name();
+    String bussiness_name = c.getBusiness_name();
 
     if(id_length != UUID.randomUUID().toString().length()){
       message += "El id del cliente no es válido.\n";

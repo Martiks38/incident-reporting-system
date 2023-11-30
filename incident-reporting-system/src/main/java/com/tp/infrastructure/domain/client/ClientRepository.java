@@ -2,7 +2,8 @@ package com.tp.infrastructure.domain.client;
 
 import java.util.List;
 
-import com.tp.infrastructure.domain.technical.Technical;
+// import com.tp.infrastructure.domain.service.Service;
+// import com.tp.infrastructure.domain.technical.Technical;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -25,7 +26,7 @@ public class ClientRepository implements ClientDAO{
   @Override
   @SuppressWarnings("unchecked")
   public List<Client> findAll() {
-    List<Client> clients = (List<Client>) manager.createQuery("DROM Client");
+    List<Client> clients = (List<Client>) manager.createQuery("FROM Client");
 
     return clients;
   }
@@ -67,9 +68,9 @@ public class ClientRepository implements ClientDAO{
       }
 
       /**@TODO Terminar errores */
-      String c_cuit = client.getCuit();
-      String c_bussiness_name = client.getBussiness_name();
-      // String c_a = client.getService();
+      // String c_cuit = client.getCuit();
+      // String c_bussiness_name = client.getBusiness_name();
+      // Service c_service = client.getService();
 
       // if(t_name != null){
       //   technical.setTechnical_name(t_name);
@@ -87,7 +88,7 @@ public class ClientRepository implements ClientDAO{
       //   technical.setIncident_resolution_speed(incident_resolution_speed);
       // }
 
-      // manager.persist(technical);
+      manager.persist(data);
 
       transaction.commit();
     } catch (Exception e) {

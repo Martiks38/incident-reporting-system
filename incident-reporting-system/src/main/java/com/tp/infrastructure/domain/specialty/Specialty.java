@@ -20,8 +20,8 @@ import lombok.Setter;
 public class Specialty {
   @Id
   @Getter
-  @Column(name = "id", nullable = false, insertable = false, updatable = false)
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", nullable = false)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Long specialty_id;
 
   @Getter
