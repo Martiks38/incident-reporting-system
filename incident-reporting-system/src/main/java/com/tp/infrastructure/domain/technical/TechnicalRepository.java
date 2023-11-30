@@ -1,8 +1,6 @@
 package com.tp.infrastructure.domain.technical;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.tp.infrastructure.domain.specialty.Specialty;
 
@@ -69,40 +67,52 @@ public class TechnicalRepository implements TechnicalDAO{
       }
 
       String t_name = data.getTechnical_name();
-      String t_media = data.getMeans_notification();
       Integer t_number_incidents_resolved = data.getNumber_incidents_resolved();
       Long t_incident_resolution_speed = data.getIncident_resolution_speed();
+      String t_mail = data.getMail();
+      String t_phone_number = data.getPhone_number();
+      Long t_fk_notification_medium = data.getFk_notification_medium();
       List<Specialty> t_specialties = data.getSpecialties();
 
       if(t_name != null){
         technical.setTechnical_name(t_name);
       }
 
-      if(t_media != null){
-        technical.setMeans_notification(t_media);
+      if(t_number_incidents_resolved != null && t_number_incidents_resolved > 0){
+        technical.setNumber_incidents_resolved(t_number_incidents_resolved);;
       }
 
-      if(t_number_incidents_resolved != null){
-        technical.setNumber_incidents_resolved(t_number_incidents_resolved);
-      }
-
-      if(t_incident_resolution_speed != null){
+      if(t_incident_resolution_speed != null && t_incident_resolution_speed > 0){
         technical.setIncident_resolution_speed(t_incident_resolution_speed);
       }
 
-      if(t_specialties != null && t_specialties.size() != 0){
-        List<String> specialties_name = technical
-          .getSpecialties().stream()
-          .map(s -> s.getSpecialty_name())
-          .collect(Collectors.toList());
-        
-        // Set<String> currentSpecialties = new HashMap<>(specialties_name);
-        
-        // List<String> newSpecialtiesList = 
-
+      if(t_mail != null && TechnicalCheckData.isValidEmail(t_mail)){
+        technical.setMail(t_mail);
       }
 
-      manager.persist(technical);
+      if(t_phone_number != null){
+        technical.setPhone_number(t_phone_number);
+      }
+
+      if(t_fk_notification_medium != null){
+        technical.setFk_notification_medium(t_fk_notification_medium);
+      }
+
+      if(t_specialties != null && t_specialties.size() != 0){
+        technical.setSpecialties(t_specialties);
+
+        /**
+         * @TODO
+         * Añadir a la lista de especialidades de no existir alli
+         *   */
+
+        // if (!specialties.contains(specialty)) {
+          // if (!specialty.getTechnicals().contains(this)) {
+          //   specialty.getTechnicals().add(this);
+        // }
+      };
+
+      manager.merge(technical);
 
       transaction.commit();
     } catch (Exception e) {
