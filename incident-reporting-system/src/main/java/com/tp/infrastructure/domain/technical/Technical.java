@@ -23,43 +23,61 @@ import com.tp.infrastructure.domain.incident.Incident;
 import com.tp.infrastructure.domain.notificationMedium.NotificationMedium;
 import com.tp.infrastructure.domain.specialty.Specialty;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "technical", schema = "technical")
 @Entity
 public class Technical {
+
   @Id
-  @Column(name = "id", nullable = false, length = 36)
+  @Getter
+  @Column(name = "id", nullable = false, length = 36, insertable = false, updatable = false)
   @GeneratedValue(strategy = GenerationType.UUID)
   private String technical_id;
 
+  @Getter
+  @Setter
   @Column(nullable = false, length = 60)
   private String technical_name;
-
+  
+  @Getter
+  @Setter
   @Column(nullable = false)
   private int number_incidents_resolved;
 
+  @Getter
+  @Setter
   @Column(nullable = true)
   private Long incident_resolution_speed;
 
+  @Getter
+  @Setter
   @Column(nullable = false, length = 45)
   private String mail;
 
+  @Getter
+  @Setter
   @Column(nullable = false, length = 45)
   private String phone_number;
-  
-  @Column(nullable = false)
+
+  @Getter
+  @Setter
+  @Column(insertable = false, updatable = false, nullable = false)
   private Long fk_notification_medium;
 
+  @Getter
+  @Setter
   @OneToMany(mappedBy = "technical")
   private List<Incident> incidents;
 
+  @Getter
+  @Setter
   @ManyToOne
   @JoinColumn(name = "fk_notification_medium", referencedColumnName = "id", nullable = false)
   private NotificationMedium medium;
 
+  @Getter
+  @Setter
   @ManyToMany
   @JoinTable(name = "technical__specialty", joinColumns = @JoinColumn(name = "fk_ts_technical"), inverseJoinColumns = @JoinColumn(name = "fk_ts_specialty"))
   private List<Specialty> specialties;

@@ -75,7 +75,7 @@ public class TechnicalRepository implements TechnicalDAO{
       }
 
       if(t_number_incidents_resolved != null && t_number_incidents_resolved > 0){
-        technical.setNumber_incidents_resolved(t_number_incidents_resolved);;
+        technical.setNumber_incidents_resolved(t_number_incidents_resolved);
       }
 
       if(t_incident_resolution_speed != null && t_incident_resolution_speed > 0){

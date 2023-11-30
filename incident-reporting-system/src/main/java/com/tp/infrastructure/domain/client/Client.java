@@ -8,7 +8,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -20,28 +21,41 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "client", schema = "client")
 @Entity
 public class Client {
   @Id
-  @Column(name = "id", nullable = false, length = 36)
+  @Getter
+  @Column(name = "id", nullable = false, length = 36, insertable = false, updatable = false)
   @GeneratedValue(strategy = GenerationType.UUID)
   private String client_id;
 
+  @Getter
+  @Setter
   @Column(nullable = false, length = 11)
   private String cuit;
-
-  @Column(nullable = false)
-  private String bussiness_name;
-
+  
+  @Getter
+  @Setter
+  @Column(nullable = false, length = 80)
+  private String business_name;
+  
+  @Getter
+  @Setter
+  @Column(nullable = false, length = 45)
+  private String mail;
+  
+  @Getter
+  @Setter
   @OneToMany(mappedBy = "client")
   private List<Incident> incidents;
-
-  @ManyToOne
-  @JoinColumn(name = "service_id", referencedColumnName = "id")
-  private Service service;
+  
+  @Getter
+  @Setter
+  @ManyToMany
+  @JoinTable(name = "client__service", joinColumns = @JoinColumn(name = "fk_cs_client", nullable = false), inverseJoinColumns = @JoinColumn(name = "fk_cs_service", nullable = false))
+  private List<Service> client_services;
 }
