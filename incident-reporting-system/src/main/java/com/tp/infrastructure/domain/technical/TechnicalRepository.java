@@ -17,17 +17,13 @@ public class TechnicalRepository implements TechnicalDAO{
 
   @Override
   public Technical find(String id) {
-    Technical technical = manager.find(Technical.class, id);
-
-    return technical;
+    return manager.find(Technical.class, id);
   }
 
   @Override
   @SuppressWarnings("unchecked")
   public List<Technical> findAll() {
-    List<Technical> technicals = (List<Technical>) manager.createQuery("FROM Technical").getResultList();
-
-    return technicals;
+    return (List<Technical>) manager.createQuery("FROM Technical").getResultList();
   }
 
   @Override
@@ -60,7 +56,7 @@ public class TechnicalRepository implements TechnicalDAO{
     try {
       transaction.begin();
 
-      Technical technical = this.find(id);
+      Technical technical = manager.find(Technical.class, id);
 
       if(technical == null){
         throw new RuntimeException("No se ha encontrado el técnico para actualizar sus datos.");
